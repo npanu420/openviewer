@@ -22,7 +22,7 @@ GitHub Pages publishes the root of the `main` branch. Relative asset paths suppo
 
 The static HTML includes a descriptive title and summary, a canonical URL, crawl directives, Open Graph and X/Twitter card metadata, and Schema.org WebSite, WebPage and SoftwareSourceCode data. The preview image uses the actual app screenshots. No ratings or reviews are invented.
 
-The canonical page is `https://npanu420.github.io/openviewer/`. Query-string preview links and `/index.html` use that same canonical. The sitemap at `sitemap.xml` lists only the canonical page; section anchors are not separate pages.
+The canonical page is `https://npanu420.github.io/openviewer/`. Query-string preview links and `/index.html` use that same canonical. The sitemap at `sitemap.xml` lists the home page and the F1 TV multiview guide at `f1-tv-multiview/`. Each has its own canonical URL; section anchors are not separate pages. The guide provides setup instructions, requirements, timing limitations and troubleshooting based on the app README. It links back to the product overview and the original project documentation.
 
 Search engines can crawl the public site. A `robots.txt` file must be hosted at the origin root, `https://npanu420.github.io/robots.txt`, rather than inside `/openviewer/`. This project does not control that root, so it uses page-level directives and does not add an ineffective project-level robots file.
 
