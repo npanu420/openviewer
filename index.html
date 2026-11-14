@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050505">
+  <title>OpenViewer — Your race. Every angle.</title>
+  <meta name="description" content="Your F1 TV, from every angle. A free, open-source desktop client with customizable multiview, synchronized video and replay timing.">
+  <link rel="icon" href="assets/app-icon.png">
+  <link rel="preload" href="assets/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/motion/stage.css">
+  <link rel="stylesheet" href="pitwall.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="assets/motion/gsap.min.js" defer></script>
+  <script src="assets/motion/ScrollTrigger.min.js" defer></script>
+  <script src="assets/motion/stage.js" defer></script>
+  <script src="pitwall.js" defer></script>
+  <script src="downloads.js" defer></script>
+  <script src="timing-demo.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#overview">Skip to content</a>
+<header class="site-header">
+  <div class="header-inner frame">
+    <a class="brand" href="#overview" aria-label="OpenViewer home"><img src="assets/app-icon.png" width="30" height="30" alt=""><span><b>Open</b>Viewer</span></a>
+    <nav aria-label="Main navigation"><a href="#experience">Experience</a><a href="#timing">Live Timing</a><a href="https://github.com/npanu420/F1OpenViewer">GitHub <span aria-hidden="true">↗</span></a></nav>
+    <a class="button button-small" data-download href="https://github.com/npanu420/F1OpenViewer/releases/latest"><span data-download-label>View downloads</span></a>
+  </div>
+</header>
+<main>
+<section class="scene hero-scene is-rest" id="overview" data-scene="hero-assembly" data-options='{"hold":1}'><div class="scene-stage"><div class="hero frame">
+  <div class="hero-copy">
+    <h1>Your race.<br> Every angle.</h1>
+    <p class="lead">Turn your F1 TV into your own pit wall. The main feed, your favourite onboards and timing. Together.</p>
+    <div class="hero-actions"><a class="button button-red" data-download href="https://github.com/npanu420/F1OpenViewer/releases/latest"><span data-download-label>View downloads</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12m-5-5 5 5 5-5M5 20h14"/></svg></a><a class="quiet-link" href="#experience">Explore the experience <span aria-hidden="true">↓</span></a></div>
+    <p class="small muted hero-requirement">Free and open source for Windows and macOS.<br>  A valid F1 TV subscription is required for video.</p>
+  </div>
+  <div class="hero-visual" data-ui aria-label="An exploded view of the actual OpenViewer multiview">
+    <div class="depth-space">
+      <div class="depth-rig">
+        <div class="screen-plane plane-main"><div class="plane-caption"><span>Main feed</span></div><div class="source-crop crop-race-main"><img src="assets/race-detail.jpg" width="1920" height="1080" alt="Main race feed at the Italian Grand Prix" fetchpriority="high"></div></div>
+        <div class="screen-plane plane-onboard"><div class="onboard-telemetry source-crop crop-onboard-data"><img src="assets/race-detail.jpg" width="1920" height="1080" alt="Actual Hamilton onboard data: gear, speed, DRS, lap times and intervals"></div><div class="source-crop crop-onboard-video"><img src="assets/race-detail.jpg" width="1920" height="1080" alt="Hamilton onboard camera at Monza"></div></div>
+        <div class="screen-plane plane-timing"><div class="source-crop crop-race-timing"><img src="assets/race-detail.jpg" width="1920" height="1080" alt="Live Timing standings, tyre stints and Race Control messages"></div></div>
+      </div>
+    </div>
+    <div class="depth-controls"><div class="segmented" role="group" aria-label="Screen presentation"><button type="button" data-depth="layers" aria-pressed="true">In layers</button><button type="button" data-depth="flat" aria-pressed="false">As one</button></div><span class="small muted depth-hint">One race. Your perspective.</span></div>
+  </div>
+</div></div></section>
+
+<section class="experience section-space" id="experience">
+  <div class="frame">
+    <div class="section-heading"><h2>All the action.<br> Your arrangement.</h2><p class="lead muted">A different way to watch, built around the way you follow a race.</p></div>
+    <div class="experience-controls"><div class="segmented" role="group" aria-label="Choose a viewing mode"><button type="button" data-view="multiview" aria-pressed="true">Auto layout</button><button type="button" data-view="focus" aria-pressed="false">Focus + timing</button><button type="button" data-view="session" aria-pressed="false">Session view</button></div><button class="text-button" type="button" data-open-current hidden>View full size <span aria-hidden="true">↗</span></button></div>
+    <div class="product-screen" data-ui><div class="experience-player" role="button" tabindex="0" aria-label="Play video. Double-click to enlarge." aria-describedby="player-help"><video class="experience-video" muted loop playsinline disablepictureinpicture disableremoteplayback preload="metadata" poster="assets/multiview.jpg" width="2560" height="1482" aria-label="OpenViewer auto layout demonstration: streams, Live Timing and driver HUD"><source src="assets/auto-layout-demo.mp4" type="video/mp4"><a href="assets/auto-layout-demo.mp4">Watch the auto layout video</a></video></div><button class="image-button experience-still" hidden type="button" data-enlarge aria-label="Enlarge the selected OpenViewer screenshot"><img class="experience-image" src="assets/multiview.jpg" width="1920" height="1080" alt="OpenViewer fullscreen multiview with a main feed and five onboard cameras" loading="lazy"></button></div>
+    <div class="experience-caption"><p class="small" id="view-description" aria-live="polite">Auto layout follows the window, with Live Timing and the driver HUD.</p><span class="small muted" id="player-help">Click to pause. Double-click to enlarge.</span></div>
+  </div>
+</section>
+
+<section class="sync-scene" id="sync" aria-label="Synchronized multiview">
+  <div class="scene-stage">
+    <div class="frame sync-content"><div class="sync-heading"><h2>Every feed.<br> One moment.</h2><p class="lead muted">The main feed sets the pace. OpenViewer keeps your onboards in step, even when the race feed rebuffers.</p></div>
+      <div class="assembly-perspective" data-ui><div class="assembly-screen" data-move>
+        <div class="assembly-piece piece-a" data-move><img src="assets/multiview.jpg" width="1920" height="1080" alt="Main race feed" loading="lazy"></div>
+        <div class="assembly-piece piece-b" data-move><img src="assets/multiview.jpg" width="1920" height="1080" alt="Two onboard views" loading="lazy"></div>
+        <div class="assembly-piece piece-c" data-move><img src="assets/multiview.jpg" width="1920" height="1080" alt="Additional selected onboard cameras" loading="lazy"></div>
+      </div></div>
+      <p class="small muted sync-caption">Different perspectives. The same point in the race.</p>
+    </div>
+  </div>
+</section>
+
+<section class="timing section-space" id="timing">
+  <div class="frame timing-layout">
+    <div class="timing-copy"><h2>The race<br> behind the race.</h2><p class="lead">Read the gaps. Follow the stint. Hear the radio.</p><p class="muted">For replays, Live Timing automatically aligns standings, sector times, tyre stints, Race Control and team radio with the video.</p><p class="small muted">Manual alignment is available when a replay cannot be matched automatically.</p><a class="quiet-link" href="https://github.com/npanu420/F1OpenViewer#live-timing">Inside Live Timing <span aria-hidden="true">↗</span></a></div>
+    <div class="timing-gallery" data-ui><button class="image-button timing-image" type="button" data-enlarge aria-label="Enlarge Focus view with Live Timing"><img src="assets/focus-timing.jpg" width="1920" height="1080" alt="An onboard video, three supporting feeds and synchronized Live Timing" loading="lazy"></button><div class="timing-detail"><div class="source-crop crop-timing-detail"><img src="assets/focus-timing.jpg" width="1920" height="1080" alt="Detail of the actual OpenViewer timing panel" loading="lazy"></div></div></div>
+  </div>
+</section>
+
+<section class="layout-story section-space" id="layouts">
+  <div class="frame"><div class="layout-heading"><h2>Make room<br> for your race.</h2><p class="lead muted">Drag. Resize. Save. Your multiview, ready for the next weekend.</p></div><div class="dock-demo-controls"><label class="auto-fit-label"><input type="checkbox" data-dock-auto checked> Auto-fit while scrolling</label><button class="text-button" type="button" data-dock-reset>Reset view</button></div><p class="small muted dock-demo-note">Try the divider. Timing rows adapt to the space, just like in the app.</p><div class="wide-screen layout-showcase" data-ui>
+      <div class="layout-video-column"><button class="image-button" type="button" data-enlarge aria-label="Enlarge the race view and onboard data"><span class="source-crop crop-race-view"><img src="assets/race-detail.jpg" width="1920" height="1080" alt="Main race feed with Hamilton and Verstappen onboards, including their data bars" loading="lazy"></span></button><div class="layout-bottom"><p>Go fullscreen.<br> Keep every perspective.</p><p class="muted">Save layouts you like, reuse them and open the whole multiview in its own fullscreen window. Live sessions follow the live edge.</p></div></div>
+      <div class="dock-width-handle" role="separator" tabindex="0" aria-orientation="vertical" aria-label="Resize Live Timing width" aria-valuemin="280" aria-valuemax="800" aria-valuenow="360"><span></span></div>
+      <figure class="layout-timing-panel interactive-dock" aria-label="Interactive replay timing snapshot">
+        <header class="dock-session"><strong>2025 Italian Grand Prix</strong><div><span>Lap 42/53</span><span>1:56:39</span><span class="track-clear">Track clear</span></div></header>
+        <div class="dock-panel-tabs" role="tablist" aria-label="Timing panels"><button type="button" role="tab" data-dock-tab="standings" aria-selected="true" aria-controls="dock-standings" id="dock-tab-standings">Standings</button><button type="button" role="tab" data-dock-tab="control" aria-selected="false" aria-controls="dock-control" id="dock-tab-control" tabindex="-1">Race Control</button></div>
+        <div class="dock-content"><div class="dock-standings" id="dock-standings" role="tabpanel" aria-labelledby="dock-tab-standings"><table aria-label="Italian Grand Prix replay standings"><thead><tr><th scope="col">P</th><th scope="col">Driver</th><th scope="col">Gap</th><th scope="col" class="dock-interval">Interval</th><th scope="col">Tyre</th></tr></thead><tbody></tbody></table></div><div class="dock-control" id="dock-control" role="tabpanel" aria-labelledby="dock-tab-control" hidden></div></div>
+        <figcaption class="dock-snapshot">Replay snapshot · Monza 2025</figcaption>
+        <div class="dock-height-handle" role="separator" tabindex="0" aria-orientation="horizontal" aria-label="Resize Live Timing height" aria-valuemin="380" aria-valuemax="1120" aria-valuenow="620"><span></span></div>
+      </figure>
+    </div></div>
+</section>
+
+<section class="faq section-space" id="questions"><div class="frame faq-layout"><h2>Before<br> lights out.</h2><div class="faq-items">
+  <details><summary>Do I need an F1 TV subscription?<span aria-hidden="true">+</span></summary><p>Yes. Video playback requires your own active F1 TV Pro or Premium subscription. F1 TV’s regional restrictions and entitlement checks still apply.</p></details>
+  <details><summary>Which computers are supported?<span aria-hidden="true">+</span></summary><p>Windows and macOS are supported. The Mac download is for Apple Silicon. The download buttons check the latest published release on GitHub; see the release page for every available build.</p></details>
+  <details><summary>Is Live Timing available during live sessions?<span aria-hidden="true">+</span></summary><p>Yes. The live timing feed can run tens of seconds ahead of the F1 TV video. Automatic video alignment on this page refers to replays.</p></details>
+  <details><summary>Is OpenViewer free?<span aria-hidden="true">+</span></summary><p>The app is free and open source under the MIT licence, with no ads or telemetry. Your F1 TV video subscription is separate. Live Timing uses a public archive and does not require F1 TV login.</p></details>
+</div></div></section>
+
+<section class="download section-space" id="download"><div class="frame download-inner"><h2>Your next race<br> starts here.</h2><p class="lead muted">Your F1 TV. Your desktop. Your pit wall.</p><div class="segmented platform-controls" role="group" aria-label="Choose your operating system"><button type="button" data-platform="windows" aria-pressed="false">Windows</button><button type="button" data-platform="mac" aria-pressed="false">Mac · Apple Silicon</button></div><a class="button download-link" data-download href="https://github.com/npanu420/F1OpenViewer/releases/latest"><span data-download-label>View downloads</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12m-5-5 5 5 5-5M5 20h14"/></svg></a><p class="small muted release-note"><span data-release-label aria-live="polite">Latest release on GitHub</span> <span aria-hidden="true">·</span> <a href="https://github.com/npanu420/F1OpenViewer/releases/latest" data-release-page>All releases</a></p><p class="small muted">A valid F1 TV Pro or Premium subscription is required for video.</p></div></section>
+</main>
+<footer class="site-footer frame"><div class="footer-top"><div><a class="brand" href="#overview"><span><b>Open</b>Viewer</span></a><p class="small muted">Built for the love of the race.<br> An independent project by npanu420.</p></div><div class="footer-links"><a href="https://github.com/npanu420/F1OpenViewer">GitHub</a><a href="https://github.com/npanu420/F1OpenViewer/blob/main/docs/SETUP.md">Documentation</a><a href="https://github.com/npanu420/F1OpenViewer/blob/main/LICENSE">MIT licence</a></div></div><p class="legal small muted">An unofficial, non-profit, open-source client. Not affiliated with Formula 1 or F1 TV. All broadcast content and trademarks belong to their respective owners.</p></footer>
+<dialog class="lightbox"><div class="lightbox-top"><p class="small">OpenViewer</p><button class="close-lightbox" type="button" autofocus aria-label="Close enlarged view">Close <span aria-hidden="true">×</span></button></div><img src="assets/multiview.jpg" width="1920" height="1080" alt="Enlarged OpenViewer screenshot"><div class="lightbox-player" hidden role="button" tabindex="0" aria-label="Pause video. Double-click to enlarge."><video class="lightbox-video" muted playsinline disablepictureinpicture disableremoteplayback hidden aria-label="OpenViewer auto layout demonstration"></video></div></dialog>
+</body>
+</html>
