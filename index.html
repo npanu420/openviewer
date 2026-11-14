@@ -4,8 +4,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#050505">
-  <title>OpenViewer — Your race. Every angle.</title>
-  <meta name="description" content="Your F1 TV, from every angle. A free, open-source desktop client with customizable multiview, synchronized video and replay timing.">
+  <title>OpenViewer — Free F1 TV Multiview for Windows &amp; Mac</title>
+  <meta name="description" content="Watch F1 TV your way with OpenViewer, a free, open-source app for Windows and macOS. Combine the main feed, onboards and synchronized replay timing.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://npanu420.github.io/openviewer/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="OpenViewer">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="OpenViewer — Free F1 TV Multiview for Windows &amp; Mac">
+  <meta property="og:description" content="Watch F1 TV your way with OpenViewer, a free, open-source app for Windows and macOS. Combine the main feed, onboards and synchronized replay timing.">
+  <meta property="og:url" content="https://npanu420.github.io/openviewer/">
+  <meta property="og:image" content="https://npanu420.github.io/openviewer/assets/openviewer-social.jpg">
+  <meta property="og:image:secure_url" content="https://npanu420.github.io/openviewer/assets/openviewer-social.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="OpenViewer: Your race. Every angle. Main feed, onboard telemetry and Live Timing, together.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OpenViewer — Free F1 TV Multiview for Windows &amp; Mac">
+  <meta name="twitter:description" content="Watch F1 TV your way with OpenViewer, a free, open-source app for Windows and macOS. Combine the main feed, onboards and synchronized replay timing.">
+  <meta name="twitter:image" content="https://npanu420.github.io/openviewer/assets/openviewer-social.jpg">
+  <meta name="twitter:image:alt" content="OpenViewer multiview with the race feed, an onboard and Live Timing.">
   <link rel="icon" href="assets/app-icon.png">
   <link rel="preload" href="assets/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/motion/stage.css">
@@ -17,6 +36,70 @@
   <script src="pitwall.js" defer></script>
   <script src="downloads.js" defer></script>
   <script src="timing-demo.js" defer></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://npanu420.github.io/openviewer/#website",
+      "url": "https://npanu420.github.io/openviewer/",
+      "name": "OpenViewer",
+      "description": "Watch F1 TV your way with OpenViewer, a free, open-source app for Windows and macOS. Combine the main feed, onboards and synchronized replay timing.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://npanu420.github.io/openviewer/#author"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://npanu420.github.io/openviewer/#webpage",
+      "url": "https://npanu420.github.io/openviewer/",
+      "name": "OpenViewer — Free F1 TV Multiview for Windows & Mac",
+      "description": "Watch F1 TV your way with OpenViewer, a free, open-source app for Windows and macOS. Combine the main feed, onboards and synchronized replay timing.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://npanu420.github.io/openviewer/#website"
+      },
+      "mainEntity": {
+        "@id": "https://npanu420.github.io/openviewer/#project"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://npanu420.github.io/openviewer/assets/openviewer-social.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://npanu420.github.io/openviewer/#project",
+      "name": "OpenViewer",
+      "alternateName": "F1OpenViewer",
+      "description": "Watch F1 TV your way with OpenViewer, a free, open-source app for Windows and macOS. Combine the main feed, onboards and synchronized replay timing.",
+      "url": "https://npanu420.github.io/openviewer/",
+      "codeRepository": "https://github.com/npanu420/F1OpenViewer",
+      "license": "https://github.com/npanu420/F1OpenViewer/blob/main/LICENSE",
+      "programmingLanguage": "TypeScript",
+      "runtimePlatform": [
+        "Windows",
+        "macOS (Apple Silicon)"
+      ],
+      "isAccessibleForFree": true,
+      "author": {
+        "@id": "https://npanu420.github.io/openviewer/#author"
+      },
+      "image": "https://npanu420.github.io/openviewer/assets/openviewer-social.jpg"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://npanu420.github.io/openviewer/#author",
+      "name": "npanu420",
+      "url": "https://github.com/npanu420"
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 <a class="skip-link" href="#overview">Skip to content</a>
@@ -31,7 +114,7 @@
 <section class="scene hero-scene is-rest" id="overview" data-scene="hero-assembly" data-options='{"hold":1}'><div class="scene-stage"><div class="hero frame">
   <div class="hero-copy">
     <h1>Your race.<br> Every angle.</h1>
-    <p class="lead">Turn your F1 TV into your own pit wall. The main feed, your favourite onboards and timing. Together.</p>
+    <p class="lead">Your F1 TV, together in OpenViewer. The main feed, your favourite onboards and timing. Your own pit wall.</p>
     <div class="hero-actions"><a class="button button-red" data-download href="https://github.com/npanu420/F1OpenViewer/releases/latest"><span data-download-label>View downloads</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12m-5-5 5 5 5-5M5 20h14"/></svg></a><a class="quiet-link" href="#experience">Explore the experience <span aria-hidden="true">↓</span></a></div>
     <p class="small muted hero-requirement">Free and open source for Windows and macOS.<br>  A valid F1 TV subscription is required for video.</p>
   </div>
@@ -51,7 +134,7 @@
   <div class="frame">
     <div class="section-heading"><h2>All the action.<br> Your arrangement.</h2><p class="lead muted">A different way to watch, built around the way you follow a race.</p></div>
     <div class="experience-controls"><div class="segmented" role="group" aria-label="Choose a viewing mode"><button type="button" data-view="multiview" aria-pressed="true">Auto layout</button><button type="button" data-view="focus" aria-pressed="false">Focus + timing</button><button type="button" data-view="session" aria-pressed="false">Session view</button></div><button class="text-button" type="button" data-open-current hidden>View full size <span aria-hidden="true">↗</span></button></div>
-    <div class="product-screen" data-ui><div class="experience-player" role="button" tabindex="0" aria-label="Play video. Double-click to enlarge." aria-describedby="player-help"><video class="experience-video" muted loop playsinline disablepictureinpicture disableremoteplayback preload="metadata" poster="assets/multiview.jpg" width="2560" height="1482" aria-label="OpenViewer auto layout demonstration: streams, Live Timing and driver HUD"><source src="assets/auto-layout-demo.mp4" type="video/mp4"><a href="assets/auto-layout-demo.mp4">Watch the auto layout video</a></video></div><button class="image-button experience-still" hidden type="button" data-enlarge aria-label="Enlarge the selected OpenViewer screenshot"><img class="experience-image" src="assets/multiview.jpg" width="1920" height="1080" alt="OpenViewer fullscreen multiview with a main feed and five onboard cameras" loading="lazy"></button></div>
+    <div class="product-screen" data-ui><div class="experience-player" role="button" tabindex="0" aria-label="Play video. Double-click to enlarge." aria-describedby="player-help"><video class="experience-video" muted loop playsinline disablepictureinpicture disableremoteplayback preload="none" poster="assets/multiview.jpg" width="2560" height="1482" aria-label="OpenViewer auto layout demonstration: streams, Live Timing and driver HUD"><source src="assets/auto-layout-demo.mp4" type="video/mp4"><a href="assets/auto-layout-demo.mp4">Watch the auto layout video</a></video></div><button class="image-button experience-still" hidden type="button" data-enlarge aria-label="Enlarge the selected OpenViewer screenshot"><img class="experience-image" src="assets/multiview.jpg" width="1920" height="1080" alt="OpenViewer fullscreen multiview with a main feed and five onboard cameras" loading="lazy"></button></div>
     <div class="experience-caption"><p class="small" id="view-description" aria-live="polite">Auto layout follows the window, with Live Timing and the driver HUD.</p><span class="small muted" id="player-help">Click to pause. Double-click to enlarge.</span></div>
   </div>
 </section>
@@ -99,7 +182,7 @@
 
 <section class="download section-space" id="download"><div class="frame download-inner"><h2>Your next race<br> starts here.</h2><p class="lead muted">Your F1 TV. Your desktop. Your pit wall.</p><div class="segmented platform-controls" role="group" aria-label="Choose your operating system"><button type="button" data-platform="windows" aria-pressed="false">Windows</button><button type="button" data-platform="mac" aria-pressed="false">Mac · Apple Silicon</button></div><a class="button download-link" data-download href="https://github.com/npanu420/F1OpenViewer/releases/latest"><span data-download-label>View downloads</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12m-5-5 5 5 5-5M5 20h14"/></svg></a><p class="small muted release-note"><span data-release-label aria-live="polite">Latest release on GitHub</span> <span aria-hidden="true">·</span> <a href="https://github.com/npanu420/F1OpenViewer/releases/latest" data-release-page>All releases</a></p><p class="small muted">A valid F1 TV Pro or Premium subscription is required for video.</p></div></section>
 </main>
-<footer class="site-footer frame"><div class="footer-top"><div><a class="brand" href="#overview"><span><b>Open</b>Viewer</span></a><p class="small muted">Built for the love of the race.<br> An independent project by npanu420.</p></div><div class="footer-links"><a href="https://github.com/npanu420/F1OpenViewer">GitHub</a><a href="https://github.com/npanu420/F1OpenViewer/blob/main/docs/SETUP.md">Documentation</a><a href="https://github.com/npanu420/F1OpenViewer/blob/main/LICENSE">MIT licence</a></div></div><p class="legal small muted">An unofficial, non-profit, open-source client. Not affiliated with Formula 1 or F1 TV. All broadcast content and trademarks belong to their respective owners.</p></footer>
+<footer class="site-footer frame"><div class="footer-top"><div><a class="brand" href="#overview"><span><b>Open</b>Viewer</span></a><p class="small muted">Built for the love of the race.<br> An independent project by npanu420.</p></div><div class="footer-links"><a href="https://github.com/npanu420/F1OpenViewer">GitHub</a><a href="https://github.com/npanu420/F1OpenViewer/blob/main/docs/SETUP.md">Documentation</a><a href="https://github.com/npanu420/F1OpenViewer/blob/main/LICENSE">MIT licence</a><a href="sitemap.xml">Sitemap</a></div></div><p class="legal small muted">An unofficial, non-profit, open-source client. Not affiliated with Formula 1 or F1 TV. All broadcast content and trademarks belong to their respective owners.</p></footer>
 <dialog class="lightbox"><div class="lightbox-top"><p class="small">OpenViewer</p><button class="close-lightbox" type="button" autofocus aria-label="Close enlarged view">Close <span aria-hidden="true">×</span></button></div><img src="assets/multiview.jpg" width="1920" height="1080" alt="Enlarged OpenViewer screenshot"><div class="lightbox-player" hidden role="button" tabindex="0" aria-label="Pause video. Double-click to enlarge."><video class="lightbox-video" muted playsinline disablepictureinpicture disableremoteplayback hidden aria-label="OpenViewer auto layout demonstration"></video></div></dialog>
 </body>
 </html>

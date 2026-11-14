@@ -87,11 +87,6 @@
         heroScene.style.setProperty('--pointer-y', `${((event.clientX - bounds.left) / bounds.width - .5) * 7}deg`);
       });
     });
-    depthRoot.addEventListener('pointerleave', () => {
-      cancelAnimationFrame(pointerFrame);
-      heroScene.style.removeProperty('--pointer-x');
-      heroScene.style.removeProperty('--pointer-y');
-    });
   }
   const dialog = document.querySelector('.lightbox');
   const dialogVideo = dialog.querySelector('.lightbox-video');
