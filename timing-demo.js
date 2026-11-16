@@ -176,7 +176,7 @@
   }
   function heightBounds() {
     const spacing = compact.matches ? 3 : 5;
-    return { min: compact.matches && defaultLayout ? 280 : 380, max: Math.max(380, Math.min(1120, Math.floor(canvas.clientWidth * 9 / 16 * feeds.length + spacing * (feeds.length - 1)))) };
+    return { min: compact.matches ? 280 : 380, max: Math.max(380, Math.min(1120, Math.floor(canvas.clientWidth * 9 / 16 * feeds.length + spacing * (feeds.length - 1)))) };
   }
   function setHeight(next) {
     const limits = heightBounds();
@@ -238,7 +238,7 @@
   });
   heightHandle.addEventListener('keydown', event => {
     if (!['ArrowUp','ArrowDown','Home','End'].includes(event.key)) return;
-    event.preventDefault();startAdjusting();auto.checked = false;setHeight(event.key === 'Home' ? 380 : event.key === 'End' ? heightBounds().max : height + (event.key === 'ArrowDown' ? 32 : -32));
+    event.preventDefault();startAdjusting();auto.checked = false;setHeight(event.key === 'Home' ? heightBounds().min : event.key === 'End' ? heightBounds().max : height + (event.key === 'ArrowDown' ? 32 : -32));
   });
   auto.addEventListener('change', scheduleFit);
   document.querySelector('[data-dock-reset]').addEventListener('click', () => {
