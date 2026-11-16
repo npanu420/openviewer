@@ -11,43 +11,6 @@
  * much; remaining ties go to the preferred tile count.
  */
 
-                            
-            
-            
-                
-                 
- 
-
-                               
-                                                                                                           
-                 
-                                                                                             
-                      
-                   
- 
-
-                                
-                
-                 
-                   
-                   
-                  
-                                                                                   
-                          
-                                                                     
-                        
-                                                                                                      
-                 
-                                                                                           
-                    
-     
-                                                                                                  
-                                                                                      
-     
-                             
-                         
- 
-
 const MAX_COLUMN = 4;
 const MAX_ROW = 5;
 const MAX_SIDE_COLUMNS = 3;
