@@ -14,6 +14,7 @@
   let feeds = [...canvas.querySelectorAll('[data-feed]')];
   const widthSlider = document.querySelector('[data-dock-width]');
   let resizing = false;
+  let defaultLayout = true;
   let shownCount = 3;
   let shownFamily = null;
   let layoutFrame = 0;
@@ -28,7 +29,7 @@
     if (W < 1) return;
     const H = height;
     // Scrolling, pointer release and unchanged ResizeObserver reports must not reflow tiles.
-    const key = `${W}:${H}:${compact.matches}`;
+    const key = `${W}:${H}:${compact.matches}:${defaultLayout}`;
     if (key === lastLayoutKey) return;
     lastLayoutKey = key;
     const origin = canvas.getBoundingClientRect();
@@ -36,11 +37,12 @@
     canvas.style.setProperty('--feed-canvas-height', `${H}px`);
     canvas.dataset.ready = 'true';
     const options = { width: W, height: H, maxTiles: feeds.length, preferredCount: 3, minTileWidth: Math.max(48, Math.min(220, showcase.clientWidth * .14)), spacing: compact.matches ? 3 : 5 };
-    const ideal = window.OpenViewerTiling.solveTiling(options);
+    const preset = defaultLayout && feeds.length >= 3;
+    const ideal = window.OpenViewerTiling.solveTiling(preset ? { ...options, count: 3, only: 'm0-2' } : options);
     if (!ideal) return;
     const current = window.OpenViewerTiling.solveTiling({ ...options, count: shownCount, keepFamily: shownFamily, keepTolerance: .03 });
     // Keep near-equivalent arrangements through small size changes instead of flipping at a tie.
-    const plan = current && current.coverage >= ideal.coverage - .025 ? current : ideal;
+    const plan = preset ? ideal : current && current.coverage >= ideal.coverage - .025 ? current : ideal;
     shownCount = plan.frames.length;
     shownFamily = plan.family;
     feeds.forEach((feed, index) => {
@@ -153,7 +155,7 @@
     const W = showcase.clientWidth;
     return compact.matches ? { min: Math.max(104, Math.round(W * .31)), max: Math.min(Math.round(W * .65), W - 22 - 94) } : { min: 280, max: Math.max(280, Math.min(1600, Math.round(W * .6))) };
   }
-  let widthRatio = compact.matches ? .42 : .35;
+  let widthRatio = compact.matches ? .31 : .35;
   let width = Math.round(showcase.clientWidth * widthRatio);
   let height = 620;
   function setWidth(next, rememberRatio = true) {
@@ -174,7 +176,7 @@
   }
   function heightBounds() {
     const spacing = compact.matches ? 3 : 5;
-    return { min: 380, max: Math.max(380, Math.min(1120, Math.floor(canvas.clientWidth * 9 / 16 * feeds.length + spacing * (feeds.length - 1)))) };
+    return { min: compact.matches && defaultLayout ? 280 : 380, max: Math.max(380, Math.min(1120, Math.floor(canvas.clientWidth * 9 / 16 * feeds.length + spacing * (feeds.length - 1)))) };
   }
   function setHeight(next) {
     const limits = heightBounds();
@@ -182,20 +184,33 @@
     height = Math.round(clamp(next, limits.min, limits.max));
     showcase.style.setProperty('--dock-height', `${height}px`);
     heightHandle.setAttribute('aria-valuenow', String(height));
+    heightHandle.setAttribute('aria-valuemin', String(limits.min));
     heightHandle.setAttribute('aria-valuemax', String(limits.max));
     if (height !== previous) scheduleFeeds();
   }
   let pendingFrame = false;
   function updateAutoHeight() {
     pendingFrame = false;
+    if (defaultLayout) widthRatio = compact.matches ? .31 : .35;
     setWidth(showcase.clientWidth * widthRatio, false);
     if (!auto.checked) return;
+    if (defaultLayout) {
+      const spacing = compact.matches ? 3 : 5;
+      const W = canvas.clientWidth;
+      setHeight(W * 9 / 16 + spacing + (W - spacing) * 9 / 32);
+      return;
+    }
     const header = document.querySelector('.site-header').offsetHeight;
     // Window size, never the section's scroll position, determines the preview height.
     setHeight(compact.matches ? Math.min(460, showcase.clientWidth * .98) : innerHeight - header - 36);
   }
   function scheduleFit() {
     if (!pendingFrame) { pendingFrame = true; requestAnimationFrame(updateAutoHeight); }
+  }
+  function startAdjusting() {
+    if (!defaultLayout) return;
+    defaultLayout = false;
+    scheduleFit();
   }
   function resizeHandle(handle, onMove, save) {
     handle.addEventListener('pointerdown', event => {
@@ -210,25 +225,24 @@
       window.addEventListener('pointermove', move);window.addEventListener('pointerup', finish);window.addEventListener('pointercancel', finish);
     });
   }
-  const saveWidth = () => { try { localStorage.setItem('openviewer-demo-dock-ratio', String(widthRatio)); } catch (_) {} };
-  resizeHandle(widthHandle, event => setWidth(showcase.getBoundingClientRect().right - event.clientX), saveWidth);
-  widthSlider.addEventListener('input', () => setWidth(Number(widthSlider.value)));
-  widthSlider.addEventListener('change', () => { commitFeeds();saveWidth(); });
+  resizeHandle(widthHandle, event => { startAdjusting();setWidth(showcase.getBoundingClientRect().right - event.clientX); });
+  widthSlider.addEventListener('input', () => { startAdjusting();setWidth(Number(widthSlider.value)); });
+  widthSlider.addEventListener('change', commitFeeds);
   widthSlider.addEventListener('pointerdown', () => { resizing = true; });
   window.addEventListener('pointerup', () => { if (resizing) { resizing = false;commitFeeds(); } });
 
-  resizeHandle(heightHandle, (event, startY, startHeight) => { auto.checked = false;setHeight(startHeight + event.clientY - startY); });
+  resizeHandle(heightHandle, (event, startY, startHeight) => { startAdjusting();auto.checked = false;setHeight(startHeight + event.clientY - startY); });
   widthHandle.addEventListener('keydown', event => {
     if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
-    event.preventDefault();const bounds = widthBounds();setWidth(event.key === 'Home' ? bounds.min : event.key === 'End' ? bounds.max : width + (event.key === 'ArrowLeft' ? 32 : -32));saveWidth();
+    event.preventDefault();startAdjusting();const bounds = widthBounds();setWidth(event.key === 'Home' ? bounds.min : event.key === 'End' ? bounds.max : width + (event.key === 'ArrowLeft' ? 32 : -32));
   });
   heightHandle.addEventListener('keydown', event => {
     if (!['ArrowUp','ArrowDown','Home','End'].includes(event.key)) return;
-    event.preventDefault();auto.checked = false;setHeight(event.key === 'Home' ? 380 : event.key === 'End' ? heightBounds().max : height + (event.key === 'ArrowDown' ? 32 : -32));
+    event.preventDefault();startAdjusting();auto.checked = false;setHeight(event.key === 'Home' ? 380 : event.key === 'End' ? heightBounds().max : height + (event.key === 'ArrowDown' ? 32 : -32));
   });
   auto.addEventListener('change', scheduleFit);
   document.querySelector('[data-dock-reset]').addEventListener('click', () => {
-    widthRatio = compact.matches ? .42 : .35;shownCount = 3;shownFamily = null;lastLayoutKey = '';setWidth(showcase.clientWidth * widthRatio);auto.checked = true;activePanel = 'standings';renderPanels();scheduleFit();commitFeeds();
+    defaultLayout = true;widthRatio = compact.matches ? .31 : .35;shownCount = 3;shownFamily = null;lastLayoutKey = '';setWidth(showcase.clientWidth * widthRatio);auto.checked = true;activePanel = 'standings';renderPanels();scheduleFit();commitFeeds();
     try { localStorage.removeItem('openviewer-demo-dock-width');localStorage.removeItem('openviewer-demo-dock-ratio'); } catch (_) {}
   });
   window.addEventListener('resize', scheduleFit);
@@ -241,7 +255,7 @@
     let previousWidth = 0;
     new ResizeObserver(() => { if (canvas.clientWidth !== previousWidth) { previousWidth = canvas.clientWidth;scheduleFeeds(); } }).observe(canvas);
   }
-  try { const saved = Number(localStorage.getItem('openviewer-demo-dock-ratio'));if (saved >= .15 && saved <= .75) widthRatio = saved; } catch (_) {}
+  // Each visit starts with the main feed and two onboards, regardless of older saved widths.
   setWidth(showcase.clientWidth * widthRatio);setHeight(height);renderPanels();updateAutoHeight();commitFeeds();
   // Hidden lazy-loaded sprite crops could appear blank when first added. Decode each
   // small standalone capture before admitting it to the automatic layout.
