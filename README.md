@@ -12,7 +12,7 @@ The site includes the original app auto-layout video, an interactive automatic m
 
 The video plays silently when in view. Click once to pause or resume; double-click for fullscreen. No native playback controls are shown. Space/Enter toggles playback and F toggles fullscreen. Reduced-motion preferences disable autoplay.
 
-The layout demo sits immediately after the hero. Drag the divider or use the width slider on a phone to reflow six actual app captures. The app’s 16:9 tiling solver chooses the feed count and placement from the available width and height; portrait columns are extended for narrow browser previews. A wide timing panel gives the feeds a vertical column, while wider video areas can place onboards below the main feed. The preview uses still captures, not live video streams.
+The layout demo sits immediately after the hero. Drag the divider or use the width slider on a phone to reflow six actual app captures. The app’s 16:9 tiling solver chooses the feed count and placement from the available width and height; portrait columns are extended for narrow browser previews. A wide timing panel gives the feeds a vertical column, while wider video areas can place onboards below the main feed. The preview uses still captures, not live video streams. Captures are pre-cropped and decoded before entering the layout. Scrolling preserves the arrangement; only changes to the workspace dimensions reflow the feeds. Fit to window uses the window size independently of scroll position.
 
 The timing demo uses a fixed replay snapshot. Video playback in the desktop app requires a valid F1 TV subscription.
 

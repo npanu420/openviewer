@@ -29,7 +29,7 @@
   <link rel="icon" href="assets/app-icon.png">
   <link rel="preload" href="assets/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/motion/stage.css">
-  <link rel="stylesheet" href="pitwall.css?v=20261116-layout">
+  <link rel="stylesheet" href="pitwall.css?v=20261116-stable">
   <script>document.documentElement.classList.add('js')</script>
   <script src="assets/motion/gsap.min.js" defer></script>
   <script src="assets/motion/ScrollTrigger.min.js" defer></script>
@@ -37,7 +37,7 @@
   <script src="pitwall.js" defer></script>
   <script src="downloads.js" defer></script>
   <script src="auto-tiling.js" defer></script>
-  <script src="timing-demo.js?v=20261116-layout" defer></script>
+  <script src="timing-demo.js?v=20261116-stable" defer></script>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -133,8 +133,8 @@
 </div></div></section>
 
 <section class="layout-story section-space" id="layouts">
-  <div class="frame"><div class="layout-heading"><h2>Make room<br> for your race.</h2><p class="lead muted">Build your F1 multiview layout. Drag. Resize. Save it for the next race weekend.</p></div><div class="dock-demo-controls"><label class="auto-fit-label"><input type="checkbox" data-dock-auto checked> Auto-fit while scrolling</label><button class="text-button" type="button" data-dock-reset>Reset view</button></div><label class="dock-width-control"><span>Timing width</span><input type="range" data-dock-width min="280" max="800" step="1" value="360" aria-label="Live Timing width"></label><div class="dock-demo-note"><p class="small muted">Drag the divider. Streams adapt to the space.</p><output class="small muted" data-feed-count aria-live="polite" aria-atomic="true">3 feeds</output></div><div class="wide-screen layout-showcase" data-ui>
-      <div class="layout-video-column"><div class="auto-feed-canvas" aria-label="Interactive automatic multiview layout"><button class="image-button auto-feed" data-feed="main" type="button" data-enlarge aria-label="Enlarge main race feed"><span class="auto-feed-crop" style="--feed-scale:152.744630%;--feed-left:-2.307080%;--feed-top:-1.133144%"><img src="assets/race-detail.jpg" width="1920" height="1080" alt="Main race feed" loading="lazy"></span></button><button class="image-button auto-feed" data-feed="ham" type="button" data-enlarge aria-label="Enlarge hamilton onboard with driver hud"><span class="auto-feed-crop" style="--feed-scale:307.200000%;--feed-left:-4.640000%;--feed-top:-204.545455%"><img src="assets/race-detail.jpg" width="1920" height="1080" alt="Hamilton onboard with driver HUD" loading="lazy"></span></button><button class="image-button auto-feed" data-feed="ver" type="button" data-enlarge aria-label="Enlarge verstappen onboard with driver hud"><span class="auto-feed-crop" style="--feed-scale:307.200000%;--feed-left:-105.600000%;--feed-top:-204.545455%"><img src="assets/race-detail.jpg" width="1920" height="1080" alt="Verstappen onboard with driver HUD" loading="lazy"></span></button><button class="image-button auto-feed" data-feed="nor" type="button" data-enlarge aria-label="Enlarge mclaren onboard" hidden><span class="auto-feed-crop" style="--feed-scale:310.177706%;--feed-left:-3.877221%;--feed-top:-205.747126%"><img src="assets/multiview.jpg" width="1920" height="1080" alt="McLaren onboard" loading="lazy"></span></button><button class="image-button auto-feed" data-feed="hul" type="button" data-enlarge aria-label="Enlarge sauber onboard" hidden><span class="auto-feed-crop" style="--feed-scale:310.177706%;--feed-left:-105.169628%;--feed-top:-205.747126%"><img src="assets/multiview.jpg" width="1920" height="1080" alt="Sauber onboard" loading="lazy"></span></button><button class="image-button auto-feed" data-feed="law" type="button" data-enlarge aria-label="Enlarge racing bulls onboard" hidden><span class="auto-feed-crop" style="--feed-scale:310.177706%;--feed-left:-206.300485%;--feed-top:-205.747126%"><img src="assets/multiview.jpg" width="1920" height="1080" alt="Racing Bulls onboard" loading="lazy"></span></button></div></div>
+  <div class="frame"><div class="layout-heading"><h2>Make room<br> for your race.</h2></div><div class="dock-demo-controls"><label class="auto-fit-label"><input type="checkbox" data-dock-auto checked> Fit to window</label><button class="text-button" type="button" data-dock-reset>Reset view</button></div><label class="dock-width-control"><span>Timing width</span><input type="range" data-dock-width min="280" max="800" step="1" value="360" aria-label="Live Timing width"></label><div class="wide-screen layout-showcase" data-ui>
+      <div class="layout-video-column"><div class="auto-feed-canvas" aria-label="Interactive automatic multiview layout"><button class="image-button auto-feed" data-feed="main" type="button" data-enlarge aria-label="Enlarge main race feed"><img src="assets/feed-main.jpg" width="1257" height="706" alt="Main race feed" loading="eager" decoding="async"></button><button class="image-button auto-feed" data-feed="ham" type="button" data-enlarge aria-label="Enlarge hamilton onboard with driver hud"><img src="assets/feed-ham.jpg" width="625" height="352" alt="Hamilton onboard with driver HUD" loading="eager" decoding="async"></button><button class="image-button auto-feed" data-feed="ver" type="button" data-enlarge aria-label="Enlarge verstappen onboard with driver hud"><img src="assets/feed-ver.jpg" width="625" height="352" alt="Verstappen onboard with driver HUD" loading="eager" decoding="async"></button><button class="image-button auto-feed" data-feed="nor" type="button" data-enlarge aria-label="Enlarge mclaren onboard" hidden><img src="assets/feed-nor.jpg" width="619" height="348" alt="McLaren onboard" loading="eager" decoding="async"></button><button class="image-button auto-feed" data-feed="hul" type="button" data-enlarge aria-label="Enlarge sauber onboard" hidden><img src="assets/feed-hul.jpg" width="619" height="348" alt="Sauber onboard" loading="eager" decoding="async"></button><button class="image-button auto-feed" data-feed="law" type="button" data-enlarge aria-label="Enlarge racing bulls onboard" hidden><img src="assets/feed-law.jpg" width="619" height="348" alt="Racing Bulls onboard" loading="eager" decoding="async"></button></div></div>
       <div class="dock-width-handle" role="separator" tabindex="0" aria-orientation="vertical" aria-label="Resize Live Timing width" aria-valuemin="280" aria-valuemax="800" aria-valuenow="360"><span></span></div>
       <figure class="layout-timing-panel interactive-dock" aria-label="Interactive replay timing snapshot">
         <header class="dock-session"><strong>2025 Italian Grand Prix</strong><div><span>Lap 42/53</span><span>1:56:39</span><span class="track-clear">Track clear</span></div></header>
@@ -143,7 +143,7 @@
         <figcaption class="dock-snapshot">Replay snapshot · Monza 2025</figcaption>
         <div class="dock-height-handle" role="separator" tabindex="0" aria-orientation="horizontal" aria-label="Resize Live Timing height" aria-valuemin="380" aria-valuemax="1120" aria-valuenow="620"><span></span></div>
       </figure>
-    </div><div class="layout-caption"><p>Go fullscreen.<br> Keep every perspective.</p><p class="muted">Open your multiview in a fullscreen window. Save a layout you like and bring it back for the next race.</p></div></div>
+    </div></div>
 </section>
 
 <section class="experience section-space" id="experience">

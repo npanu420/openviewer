@@ -11,40 +11,38 @@
   const compact = matchMedia('(max-width: 650px)');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const canvas = showcase.querySelector('.auto-feed-canvas');
-  const feeds = [...canvas.querySelectorAll('[data-feed]')];
-  const countLabel = document.querySelector('[data-feed-count]');
+  let feeds = [...canvas.querySelectorAll('[data-feed]')];
   const widthSlider = document.querySelector('[data-dock-width]');
   let resizing = false;
   let shownCount = 3;
   let shownFamily = null;
   let layoutFrame = 0;
-  let settleTimer = 0;
-  let layoutEpoch = 0;
+  let imagesReady = false;
   let lastLayoutKey = '';
 
   // Choose the count and arrangement from both dimensions, as the app does.
   // Narrow areas become a column; wider ones give the main feed a row of onboards.
-  function wantedFeedCount() {
-    if (!window.OpenViewerTiling) return 3;
-    const ideal = window.OpenViewerTiling.solveTiling({ width: canvas.clientWidth, height, maxTiles: feeds.length, preferredCount: 3, minTileWidth: Math.max(48, Math.min(220, showcase.clientWidth * .14)), spacing: compact.matches ? 3 : 5 });
-    return ideal?.frames.length || 1;
-  }
   function renderFeeds(animate = true) {
-    if (!window.OpenViewerTiling) return;
+    if (!imagesReady || !window.OpenViewerTiling || !feeds.length) return;
     const W = canvas.clientWidth;
     if (W < 1) return;
     const H = height;
-    const key = `${W.toFixed(1)}:${H.toFixed(1)}:${shownCount}:${resizing ? 1 : 0}`;
+    // Scrolling, pointer release and unchanged ResizeObserver reports must not reflow tiles.
+    const key = `${W}:${H}:${compact.matches}`;
     if (key === lastLayoutKey) return;
     lastLayoutKey = key;
     const origin = canvas.getBoundingClientRect();
     const previous = feeds.map(feed => feed.hidden ? null : feed.getBoundingClientRect());
     canvas.style.setProperty('--feed-canvas-height', `${H}px`);
     canvas.dataset.ready = 'true';
-    const plan = window.OpenViewerTiling.solveTiling({ width: W, height: H, maxTiles: feeds.length, count: shownCount, spacing: compact.matches ? 3 : 5, keepFamily: resizing ? shownFamily : null, keepTolerance: .25 });
-    if (!plan) return;
+    const options = { width: W, height: H, maxTiles: feeds.length, preferredCount: 3, minTileWidth: Math.max(48, Math.min(220, showcase.clientWidth * .14)), spacing: compact.matches ? 3 : 5 };
+    const ideal = window.OpenViewerTiling.solveTiling(options);
+    if (!ideal) return;
+    const current = window.OpenViewerTiling.solveTiling({ ...options, count: shownCount, keepFamily: shownFamily, keepTolerance: .03 });
+    // Keep near-equivalent arrangements through small size changes instead of flipping at a tie.
+    const plan = current && current.coverage >= ideal.coverage - .025 ? current : ideal;
+    shownCount = plan.frames.length;
     shownFamily = plan.family;
-    const epoch = ++layoutEpoch;
     feeds.forEach((feed, index) => {
       const old = previous[index];
       feed.getAnimations().forEach(animation => animation.cancel());
@@ -53,10 +51,7 @@
         feed.style.pointerEvents = 'none';
         feed.setAttribute('aria-hidden', 'true');feed.tabIndex = -1;
         if (feed.contains(document.activeElement)) (compact.matches ? widthSlider : widthHandle).focus({ preventScroll: true });
-        if (old && animate && !reduced.matches) {
-          const motion = feed.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 150, fill: 'forwards' });
-          motion.finished.then(() => { if (epoch === layoutEpoch) { feed.hidden = true;motion.cancel(); } }).catch(() => {});
-        } else feed.hidden = true;
+        feed.hidden = true;
         return;
       }
       feed.hidden = false;
@@ -66,26 +61,20 @@
       feed.style.height = `${target.height}px`;
       const finish = `translate3d(${target.x}px,${target.y}px,0)`;
       feed.style.transform = finish;
-      if (animate && !reduced.matches) {
-        const start = old ? `translate3d(${old.x - origin.x}px,${old.y - origin.y}px,0) scale(${old.width / target.width})` : `${finish} scale(.94)`;
-        feed.animate([{ transform: start, opacity: old ? 1 : 0 }, { transform: finish, opacity: 1 }], { duration: old ? 380 : 300, easing: 'cubic-bezier(.22,1,.36,1)' });
+      if (old && animate && !reduced.matches) {
+        const start = `translate3d(${old.x - origin.x}px,${old.y - origin.y}px,0) scale(${old.width / target.width})`;
+        feed.animate([{ transform: start }, { transform: finish }], { duration: 280, easing: 'cubic-bezier(.22,1,.36,1)' });
       }
     });
     canvas.dataset.visibleCount = String(plan.frames.length);
     canvas.dataset.family = plan.family;
     canvas.dataset.coverage = plan.coverage.toFixed(3);
-    countLabel.textContent = `${plan.frames.length} ${plan.frames.length === 1 ? 'feed' : 'feeds'}`;
   }
   function commitFeeds() {
-    clearTimeout(settleTimer);
-    if (resizing) return;
-    shownCount = wantedFeedCount();
-    renderFeeds(true);
+    scheduleFeeds();
   }
   function scheduleFeeds() {
     if (!layoutFrame) layoutFrame = requestAnimationFrame(() => { layoutFrame = 0;renderFeeds(!resizing); });
-    clearTimeout(settleTimer);
-    settleTimer = setTimeout(commitFeeds, 260);
   }
 
   // Fixed replay data transcribed from the supplied Monza lap-42 screenshot, not a live feed.
@@ -168,7 +157,9 @@
   let width = Math.round(showcase.clientWidth * widthRatio);
   let height = 620;
   function setWidth(next, rememberRatio = true) {
-    const limits = widthBounds();width = clamp(next, limits.min, limits.max);
+    const limits = widthBounds();
+    const previous = width;
+    width = Math.round(clamp(next, limits.min, limits.max));
     if (rememberRatio) widthRatio = width / Math.max(1, showcase.clientWidth);
     showcase.style.setProperty('--dock-width', `${Math.round(width)}px`);
     dock.dataset.wide = String(width >= 640);
@@ -179,7 +170,7 @@
     widthSlider.min = String(limits.min);widthSlider.max = String(limits.max);widthSlider.value = String(Math.round(width));
     widthSlider.setAttribute('aria-valuetext', `${Math.round(width)} pixels`);
     if (height > heightBounds().max) setHeight(height);
-    scheduleFeeds();
+    if (width !== previous) scheduleFeeds();
   }
   function heightBounds() {
     const spacing = compact.matches ? 3 : 5;
@@ -187,11 +178,12 @@
   }
   function setHeight(next) {
     const limits = heightBounds();
+    const previous = height;
     height = Math.round(clamp(next, limits.min, limits.max));
     showcase.style.setProperty('--dock-height', `${height}px`);
     heightHandle.setAttribute('aria-valuenow', String(height));
     heightHandle.setAttribute('aria-valuemax', String(limits.max));
-    scheduleFeeds();
+    if (height !== previous) scheduleFeeds();
   }
   let pendingFrame = false;
   function updateAutoHeight() {
@@ -199,8 +191,8 @@
     setWidth(showcase.clientWidth * widthRatio, false);
     if (!auto.checked) return;
     const header = document.querySelector('.site-header').offsetHeight;
-    const top = compact.matches ? header + 16 : Math.max(header + 16, dock.getBoundingClientRect().top);
-    setHeight(compact.matches ? Math.min(460, showcase.clientWidth * .98) : innerHeight - top - 20);
+    // Window size, never the section's scroll position, determines the preview height.
+    setHeight(compact.matches ? Math.min(460, showcase.clientWidth * .98) : innerHeight - header - 36);
   }
   function scheduleFit() {
     if (!pendingFrame) { pendingFrame = true; requestAnimationFrame(updateAutoHeight); }
@@ -236,15 +228,27 @@
   });
   auto.addEventListener('change', scheduleFit);
   document.querySelector('[data-dock-reset]').addEventListener('click', () => {
-    widthRatio = compact.matches ? .42 : .35;setWidth(showcase.clientWidth * widthRatio);auto.checked = true;activePanel = 'standings';renderPanels();scheduleFit();commitFeeds();
+    widthRatio = compact.matches ? .42 : .35;shownCount = 3;shownFamily = null;lastLayoutKey = '';setWidth(showcase.clientWidth * widthRatio);auto.checked = true;activePanel = 'standings';renderPanels();scheduleFit();commitFeeds();
     try { localStorage.removeItem('openviewer-demo-dock-width');localStorage.removeItem('openviewer-demo-dock-ratio'); } catch (_) {}
   });
-  window.addEventListener('scroll', scheduleFit, { passive: true });window.addEventListener('resize', scheduleFit);
-  if ('ResizeObserver' in window) { new ResizeObserver(fitRows).observe(content);new ResizeObserver(scheduleFit).observe(showcase); }
+  window.addEventListener('resize', scheduleFit);
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(fitRows).observe(content);
+    let previousWidth = showcase.clientWidth;
+    new ResizeObserver(() => { if (showcase.clientWidth !== previousWidth) { previousWidth = showcase.clientWidth;scheduleFit(); } }).observe(showcase);
+  }
   if ('ResizeObserver' in window) {
     let previousWidth = 0;
     new ResizeObserver(() => { if (canvas.clientWidth !== previousWidth) { previousWidth = canvas.clientWidth;scheduleFeeds(); } }).observe(canvas);
   }
   try { const saved = Number(localStorage.getItem('openviewer-demo-dock-ratio'));if (saved >= .15 && saved <= .75) widthRatio = saved; } catch (_) {}
   setWidth(showcase.clientWidth * widthRatio);setHeight(height);renderPanels();updateAutoHeight();commitFeeds();
+  // Hidden lazy-loaded sprite crops could appear blank when first added. Decode each
+  // small standalone capture before admitting it to the automatic layout.
+  Promise.all(feeds.map(async feed => {
+    try { await feed.querySelector('img').decode();return feed; }
+    catch (_) { feed.hidden = true;return null; }
+  })).then(loaded => {
+    feeds = loaded.filter(Boolean);imagesReady = true;renderFeeds(false);
+  });
 })();
