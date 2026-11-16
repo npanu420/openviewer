@@ -8,9 +8,11 @@ The website for [OpenViewer](https://github.com/npanu420/F1OpenViewer), an open-
 
 Open `index.html` in a browser, or serve this directory with a static HTTP server. No build step is required.
 
-The site includes the original app auto-layout video, an interactive timing snapshot and operating-system-aware downloads from the latest published app release. Release metadata is checked through GitHub's public API and cached for ten minutes. If metadata is unavailable, downloads fall back to the GitHub release page.
+The site includes the original app auto-layout video, an interactive automatic multiview and timing snapshot and operating-system-aware downloads from the latest published app release. Release metadata is checked through GitHub's public API and cached for ten minutes. If metadata is unavailable, downloads fall back to the GitHub release page.
 
 The video plays silently when in view. Click once to pause or resume; double-click for fullscreen. No native playback controls are shown. Space/Enter toggles playback and F toggles fullscreen. Reduced-motion preferences disable autoplay.
+
+The layout demo sits immediately after the hero. Drag the divider or use the width slider on a phone to reflow six actual app captures. The app’s 16:9 tiling solver chooses the feed count and placement from the available width and height; portrait columns are extended for narrow browser previews. A wide timing panel gives the feeds a vertical column, while wider video areas can place onboards below the main feed. The preview uses still captures, not live video streams.
 
 The timing demo uses a fixed replay snapshot. Video playback in the desktop app requires a valid F1 TV subscription.
 

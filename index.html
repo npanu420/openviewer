@@ -29,14 +29,15 @@
   <link rel="icon" href="assets/app-icon.png">
   <link rel="preload" href="assets/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/motion/stage.css">
-  <link rel="stylesheet" href="pitwall.css?v=20261114-search">
+  <link rel="stylesheet" href="pitwall.css?v=20261116-layout">
   <script>document.documentElement.classList.add('js')</script>
   <script src="assets/motion/gsap.min.js" defer></script>
   <script src="assets/motion/ScrollTrigger.min.js" defer></script>
   <script src="assets/motion/stage.js" defer></script>
   <script src="pitwall.js" defer></script>
   <script src="downloads.js" defer></script>
-  <script src="timing-demo.js" defer></script>
+  <script src="auto-tiling.js" defer></script>
+  <script src="timing-demo.js?v=20261116-layout" defer></script>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -107,7 +108,7 @@
 <header class="site-header">
   <div class="header-inner frame">
     <a class="brand" href="#overview" aria-label="OpenViewer home"><img src="assets/app-icon.png" width="30" height="30" alt=""><span><b>Open</b>Viewer</span></a>
-    <nav aria-label="Main navigation"><a href="#experience">Experience</a><a href="#timing">Live Timing</a><a href="https://github.com/npanu420/F1OpenViewer">GitHub <span aria-hidden="true">↗</span></a></nav>
+    <nav aria-label="Main navigation"><a href="#layouts">Experience</a><a href="#timing">Live Timing</a><a href="https://github.com/npanu420/F1OpenViewer">GitHub <span aria-hidden="true">↗</span></a></nav>
     <a class="button button-small" data-download href="https://github.com/npanu420/F1OpenViewer/releases/latest"><span data-download-label>View downloads</span></a>
   </div>
 </header>
@@ -116,7 +117,7 @@
   <div class="hero-copy">
     <h1>Your race.<br> Every angle.</h1>
     <p class="lead">F1 TV multiview, made yours. OpenViewer brings the main feed, your favourite onboards and live timing together.</p>
-    <div class="hero-actions"><a class="button button-red" data-download href="https://github.com/npanu420/F1OpenViewer/releases/latest"><span data-download-label>View downloads</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12m-5-5 5 5 5-5M5 20h14"/></svg></a><a class="quiet-link" href="#experience">Explore the experience <span aria-hidden="true">↓</span></a></div>
+    <div class="hero-actions"><a class="button button-red" data-download href="https://github.com/npanu420/F1OpenViewer/releases/latest"><span data-download-label>View downloads</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12m-5-5 5 5 5-5M5 20h14"/></svg></a><a class="quiet-link" href="#layouts">Explore the experience <span aria-hidden="true">↓</span></a></div>
     <p class="small muted hero-requirement">Free and open source for Windows and macOS.<br>  A valid F1 TV subscription is required for video.</p>
   </div>
   <div class="hero-visual" data-ui aria-label="An exploded view of the actual OpenViewer multiview">
@@ -131,6 +132,20 @@
   </div>
 </div></div></section>
 
+<section class="layout-story section-space" id="layouts">
+  <div class="frame"><div class="layout-heading"><h2>Make room<br> for your race.</h2><p class="lead muted">Build your F1 multiview layout. Drag. Resize. Save it for the next race weekend.</p></div><div class="dock-demo-controls"><label class="auto-fit-label"><input type="checkbox" data-dock-auto checked> Auto-fit while scrolling</label><button class="text-button" type="button" data-dock-reset>Reset view</button></div><label class="dock-width-control"><span>Timing width</span><input type="range" data-dock-width min="280" max="800" step="1" value="360" aria-label="Live Timing width"></label><div class="dock-demo-note"><p class="small muted">Drag the divider. Streams adapt to the space.</p><output class="small muted" data-feed-count aria-live="polite" aria-atomic="true">3 feeds</output></div><div class="wide-screen layout-showcase" data-ui>
+      <div class="layout-video-column"><div class="auto-feed-canvas" aria-label="Interactive automatic multiview layout"><button class="image-button auto-feed" data-feed="main" type="button" data-enlarge aria-label="Enlarge main race feed"><span class="auto-feed-crop" style="--feed-scale:152.744630%;--feed-left:-2.307080%;--feed-top:-1.133144%"><img src="assets/race-detail.jpg" width="1920" height="1080" alt="Main race feed" loading="lazy"></span></button><button class="image-button auto-feed" data-feed="ham" type="button" data-enlarge aria-label="Enlarge hamilton onboard with driver hud"><span class="auto-feed-crop" style="--feed-scale:307.200000%;--feed-left:-4.640000%;--feed-top:-204.545455%"><img src="assets/race-detail.jpg" width="1920" height="1080" alt="Hamilton onboard with driver HUD" loading="lazy"></span></button><button class="image-button auto-feed" data-feed="ver" type="button" data-enlarge aria-label="Enlarge verstappen onboard with driver hud"><span class="auto-feed-crop" style="--feed-scale:307.200000%;--feed-left:-105.600000%;--feed-top:-204.545455%"><img src="assets/race-detail.jpg" width="1920" height="1080" alt="Verstappen onboard with driver HUD" loading="lazy"></span></button><button class="image-button auto-feed" data-feed="nor" type="button" data-enlarge aria-label="Enlarge mclaren onboard" hidden><span class="auto-feed-crop" style="--feed-scale:310.177706%;--feed-left:-3.877221%;--feed-top:-205.747126%"><img src="assets/multiview.jpg" width="1920" height="1080" alt="McLaren onboard" loading="lazy"></span></button><button class="image-button auto-feed" data-feed="hul" type="button" data-enlarge aria-label="Enlarge sauber onboard" hidden><span class="auto-feed-crop" style="--feed-scale:310.177706%;--feed-left:-105.169628%;--feed-top:-205.747126%"><img src="assets/multiview.jpg" width="1920" height="1080" alt="Sauber onboard" loading="lazy"></span></button><button class="image-button auto-feed" data-feed="law" type="button" data-enlarge aria-label="Enlarge racing bulls onboard" hidden><span class="auto-feed-crop" style="--feed-scale:310.177706%;--feed-left:-206.300485%;--feed-top:-205.747126%"><img src="assets/multiview.jpg" width="1920" height="1080" alt="Racing Bulls onboard" loading="lazy"></span></button></div></div>
+      <div class="dock-width-handle" role="separator" tabindex="0" aria-orientation="vertical" aria-label="Resize Live Timing width" aria-valuemin="280" aria-valuemax="800" aria-valuenow="360"><span></span></div>
+      <figure class="layout-timing-panel interactive-dock" aria-label="Interactive replay timing snapshot">
+        <header class="dock-session"><strong>2025 Italian Grand Prix</strong><div><span>Lap 42/53</span><span>1:56:39</span><span class="track-clear">Track clear</span></div></header>
+        <div class="dock-panel-tabs" role="tablist" aria-label="Timing panels"><button type="button" role="tab" data-dock-tab="standings" aria-selected="true" aria-controls="dock-standings" id="dock-tab-standings">Standings</button><button type="button" role="tab" data-dock-tab="control" aria-selected="false" aria-controls="dock-control" id="dock-tab-control" tabindex="-1">Race Control</button></div>
+        <div class="dock-content"><div class="dock-standings" id="dock-standings" role="tabpanel" aria-labelledby="dock-tab-standings"><table aria-label="Italian Grand Prix replay standings"><thead><tr><th scope="col">P</th><th scope="col">Driver</th><th scope="col">Gap</th><th scope="col" class="dock-interval">Interval</th><th scope="col">Tyre</th></tr></thead><tbody></tbody></table></div><div class="dock-control" id="dock-control" role="tabpanel" aria-labelledby="dock-tab-control" hidden></div></div>
+        <figcaption class="dock-snapshot">Replay snapshot · Monza 2025</figcaption>
+        <div class="dock-height-handle" role="separator" tabindex="0" aria-orientation="horizontal" aria-label="Resize Live Timing height" aria-valuemin="380" aria-valuemax="1120" aria-valuenow="620"><span></span></div>
+      </figure>
+    </div><div class="layout-caption"><p>Go fullscreen.<br> Keep every perspective.</p><p class="muted">Open your multiview in a fullscreen window. Save a layout you like and bring it back for the next race.</p></div></div>
+</section>
+
 <section class="experience section-space" id="experience">
   <div class="frame">
     <div class="section-heading"><h2>All the action.<br> Your arrangement.</h2><p class="lead muted">An F1 multiview app for Windows and macOS, built around the way you follow a race.</p></div>
@@ -140,39 +155,16 @@
   </div>
 </section>
 
-<section class="sync-scene" id="sync" aria-label="Synchronized multiview">
-  <div class="scene-stage">
-    <div class="frame sync-content"><div class="sync-heading"><h2>Every feed.<br> One moment.</h2><p class="lead muted">The main feed sets the pace. Automatic stream sync keeps your F1 onboards in step, even when the race feed rebuffers.</p></div>
-      <div class="assembly-perspective" data-ui><div class="assembly-screen" data-move>
-        <div class="assembly-piece piece-a" data-move><img src="assets/multiview.jpg" width="1920" height="1080" alt="Main race feed" loading="lazy"></div>
-        <div class="assembly-piece piece-b" data-move><img src="assets/multiview.jpg" width="1920" height="1080" alt="Two onboard views" loading="lazy"></div>
-        <div class="assembly-piece piece-c" data-move><img src="assets/multiview.jpg" width="1920" height="1080" alt="Additional selected onboard cameras" loading="lazy"></div>
-      </div></div>
-      <p class="small muted sync-caption">Different perspectives. The same point in the race.</p>
-    </div>
-  </div>
-</section>
+
 
 <section class="timing section-space" id="timing">
   <div class="frame timing-layout">
-    <div class="timing-copy"><h2>F1 live timing.<br> In the moment.</h2><p class="lead">Read the gaps. Follow the stint. Hear the radio.</p><p class="muted">Live Timing keeps standings, sector times, tyre stints, Race Control and team radio synchronized with the video, during live sessions and replays.</p><p class="small muted">Live and replay data follow the moment you are watching.</p><a class="quiet-link" href="https://github.com/npanu420/F1OpenViewer#live-timing">Inside Live Timing <span aria-hidden="true">↗</span></a></div>
+    <div class="timing-copy"><h2>Every feed.<br> One moment.</h2><p class="lead">F1 live timing, onboards and the main feed. In sync.</p><p class="muted">Live Timing keeps standings, sector times, tyre stints, Race Control and team radio synchronized with the video, during live sessions and replays.</p><p class="small muted">If the main feed rebuffers, the other videos wait. Live and replay timing stay with the action.</p><a class="quiet-link" href="https://github.com/npanu420/F1OpenViewer#live-timing">Inside Live Timing <span aria-hidden="true">↗</span></a></div>
     <div class="timing-gallery" data-ui><button class="image-button timing-image" type="button" data-enlarge aria-label="Enlarge Focus view with Live Timing"><img src="assets/focus-timing.jpg" width="1920" height="1080" alt="An onboard video, three supporting feeds and synchronized Live Timing" loading="lazy"></button><div class="timing-detail"><div class="source-crop crop-timing-detail"><img src="assets/focus-timing.jpg" width="1920" height="1080" alt="Detail of the actual OpenViewer timing panel" loading="lazy"></div></div></div>
   </div>
 </section>
 
-<section class="layout-story section-space" id="layouts">
-  <div class="frame"><div class="layout-heading"><h2>Make room<br> for your race.</h2><p class="lead muted">Build your F1 multiview layout. Drag. Resize. Save it for the next race weekend.</p></div><div class="dock-demo-controls"><label class="auto-fit-label"><input type="checkbox" data-dock-auto checked> Auto-fit while scrolling</label><button class="text-button" type="button" data-dock-reset>Reset view</button></div><p class="small muted dock-demo-note">Try the divider. Timing rows adapt to the space, just like in the app.</p><div class="wide-screen layout-showcase" data-ui>
-      <div class="layout-video-column"><button class="image-button" type="button" data-enlarge aria-label="Enlarge the race view and onboard data"><span class="source-crop crop-race-view"><img src="assets/race-detail.jpg" width="1920" height="1080" alt="Main race feed with Hamilton and Verstappen onboards, including their data bars" loading="lazy"></span></button><div class="layout-bottom"><p>Go fullscreen.<br> Keep every perspective.</p><p class="muted">Save layouts you like, reuse them and open the whole multiview in its own fullscreen window. Live sessions follow the live edge.</p></div></div>
-      <div class="dock-width-handle" role="separator" tabindex="0" aria-orientation="vertical" aria-label="Resize Live Timing width" aria-valuemin="280" aria-valuemax="800" aria-valuenow="360"><span></span></div>
-      <figure class="layout-timing-panel interactive-dock" aria-label="Interactive replay timing snapshot">
-        <header class="dock-session"><strong>2025 Italian Grand Prix</strong><div><span>Lap 42/53</span><span>1:56:39</span><span class="track-clear">Track clear</span></div></header>
-        <div class="dock-panel-tabs" role="tablist" aria-label="Timing panels"><button type="button" role="tab" data-dock-tab="standings" aria-selected="true" aria-controls="dock-standings" id="dock-tab-standings">Standings</button><button type="button" role="tab" data-dock-tab="control" aria-selected="false" aria-controls="dock-control" id="dock-tab-control" tabindex="-1">Race Control</button></div>
-        <div class="dock-content"><div class="dock-standings" id="dock-standings" role="tabpanel" aria-labelledby="dock-tab-standings"><table aria-label="Italian Grand Prix replay standings"><thead><tr><th scope="col">P</th><th scope="col">Driver</th><th scope="col">Gap</th><th scope="col" class="dock-interval">Interval</th><th scope="col">Tyre</th></tr></thead><tbody></tbody></table></div><div class="dock-control" id="dock-control" role="tabpanel" aria-labelledby="dock-tab-control" hidden></div></div>
-        <figcaption class="dock-snapshot">Replay snapshot · Monza 2025</figcaption>
-        <div class="dock-height-handle" role="separator" tabindex="0" aria-orientation="horizontal" aria-label="Resize Live Timing height" aria-valuemin="380" aria-valuemax="1120" aria-valuenow="620"><span></span></div>
-      </figure>
-    </div></div>
-</section>
+
 
 <section class="reading-section" id="guide"><div class="frame reading-grid"><h2>F1 multiview.<br> Start here.</h2><div><p class="lead">Set up multiple F1 TV streams, choose your onboards and bring Live Timing alongside the race. Our guide walks through your first layout on Windows or Mac.</p><a class="quiet-link" href="f1-tv-multiview/">Read the F1 TV multiview guide <span aria-hidden="true">↗</span></a></div></div></section>
 
